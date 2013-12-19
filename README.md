@@ -6,12 +6,11 @@ Detect utf-8, windows-1251, koi8-r, iso8859-5 cyrillic encoding
 
 Usage:
 
-<?php
 	$text = 'Привет, как дела?';
         require_once 'detect_encoding/Encoding.php';
         $Detector = new \DetectCyrillic\Encoding($text);
         $encoding = $Detector->detectMaxRelevant();
-?>
+
 
 Класс для определения кодировки текста. Использует статистические методы, см. исходные статьи:
 
