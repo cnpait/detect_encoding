@@ -4,7 +4,7 @@
 
 Detect utf-8, windows-1251, koi8-r, iso8859-5 cyrillic encoding
 
-Ivan Matveev, 2013
+Ivan Matveev, 2013, https://github.com/cnpait/detect_encodingc
 
 Fast fork from https://github.com/m00t/detect_encoding/
 See more:
@@ -13,7 +13,8 @@ See more:
 
 Usage:
 
-	require_once '/detect_encoding/Encoding.php';
+        $text = 'Привет, как дела?';
+	require_once 'detect_encoding/Encoding.php';
 	$Detector = new \DetectCyrillic\Encoding($text);
 	$encoding = $Detector->detectMaxRelevant();
 
