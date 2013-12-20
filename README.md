@@ -28,7 +28,7 @@ Usage Example
 
     $text = 'Привет, как дела?';
     //require_once 'detect_encoding/classes/DetectCyrillic/Encoding.php';
-    $Detector = new \DetectCyrillic\Encoding($text);
+    $Detector = new Encoding($text);
     $encoding = $Detector->detectMaxRelevant();
 
     ?>
