@@ -14,7 +14,7 @@ See more:
 Usage:
 
         $text = 'Привет, как дела?';
-	require_once 'detect_encoding/Encoding.php';
+	require_once 'detect_encoding/classes/Encoding.php';
 	$Detector = new \DetectCyrillic\Encoding($text);
 	$encoding = $Detector->detectMaxRelevant();
 
