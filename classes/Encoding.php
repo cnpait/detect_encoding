@@ -4,7 +4,7 @@
 
 Detect utf-8, windows-1251, koi8-r, iso8859-5 cyrillic encoding
 
-Ivan Matveev, 2013, https://github.com/cnpait/detect_encodingc
+Ivan Matveev, 2013, https://github.com/cnpait/detect_encoding/
 
 Fast fork from https://github.com/m00t/detect_encoding/
 See more:
