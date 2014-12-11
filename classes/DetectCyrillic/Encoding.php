@@ -19,8 +19,8 @@ Usage:
 
     $text = 'Привет, как дела?';
     //require_once 'detect_encoding/classes/DetectCyrillic/Encoding.php';
-    $Detector = new Encoding($text);
-    $encoding = $Detector->detectMaxRelevant();
+    $Detector = new Encoding();
+    $encoding = $Detector->detectMaxRelevant($text);
 
     ?>
 
@@ -31,33 +31,26 @@ namespace DetectCyrillic;
 class Encoding
 {
 	private $possible_encodings = array("windows-1251", "koi8-r", "iso8859-5");
-	private $content;
-	private $specter_path;
-	private $weights = array();
 	private $specters = array();
-	private $sum_weight = array();
-	private $relevant_encoding;
 
-	function __construct($content)
+	function __construct()
 	{
-		$this->specter_path = __DIR__."/specters/";
-        	$this->content = $content;
+		$this->setSpecterPath(__DIR__."/../../specters/");
 	}
 
 	public function setSpecterPath($path)
 	{
-		$this->specter_path = $path;
-	}
-
-	public function getWeights()
-	{
 		foreach ($this->possible_encodings as $encoding)
 		{
-			$this->weights[$encoding] = 0;
-			$this->specters[$encoding] = require $this->specter_path.$encoding.".php";
+			$this->specters[$encoding] = require rtrim($path, "/")."/".$encoding.".php";
 		}
+	}
 
-		if(preg_match_all("#(?<let>.{2})#", $this->content, $matches))
+	public function getWeights($content)
+	{
+		$weights = array_fill_keys($this->possible_encodings, 0);
+
+		if(preg_match_all("#(?<let>.{2})#", $content, $matches))
 		{
 			foreach($matches['let'] as $key)
 			{
@@ -65,32 +58,31 @@ class Encoding
 				{
 					if(isset($this->specters[$encoding][$key]))
 					{
-						$this->weights[$encoding] += $this->specters[$encoding][$key];
+						$weights[$encoding] += $this->specters[$encoding][$key];
 					}
 				}
 			}
 		}
 
-		$this->sum_weight = array_sum($this->weights);
-		foreach ($this->weights as $encoding => $weight)
+		$weightSum = array_sum($weights);
+		foreach ($weights as $encoding => $weight)
 		{
-			$this->weights[$encoding] = ($this->sum_weight)?($weight / $this->sum_weight):0;
+			$weights[$encoding] = $weightSum?($weight / $weightSum):0;
 		}
 
-		return $this->weights;
+		return $weights;
 	}
 
-	public function detectMaxRelevant()
+	public function detectMaxRelevant($content)
 	{
-		if(preg_match('#.#u', $this->content))
+		if(!$content or preg_match('#.#u', $content))
 		{
 			return "utf-8";
 		}
 		else
 		{
-			$this->weights = $this->getWeights();
-			$this->relevant_encoding = array_keys($this->weights, max($this->weights));
-			return $this->relevant_encoding[0];
+			$weights = $this->getWeights($content);
+			return array_search(max($weights), $weights);
 		}
 	}
 

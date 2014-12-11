@@ -28,8 +28,8 @@ Usage Example
 
     $text = 'Привет, как дела?';
     //require_once 'detect_encoding/classes/DetectCyrillic/Encoding.php';
-    $Detector = new Encoding($text);
-    $encoding = $Detector->detectMaxRelevant();
+    $Detector = new Encoding();
+    $encoding = $Detector->detectMaxRelevant($text);
 
     ?>
 ```
