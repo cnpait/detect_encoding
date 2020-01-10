@@ -1,5 +1,5 @@
 {
-    "name": "cnpait/detect_encoding",
+    "name": "ivanmtw/detect_encoding",
     "type": "library",
     "description": "Cyrillic text encoding detection class",
     "keywords": [
@@ -7,13 +7,13 @@
     	"cyrillic",
     	"mb_detect_encoding"
     ],
-    "homepage": "https://github.com/cnpait/detect_encoding",
+    "homepage": "https://github.com/ivanmtw/detect_encoding",
     "license": "MIT",
     "authors": [
         {
             "name": "Ivan Matveev",
-            "email": "cnpait@gmail.com",
-            "homepage": "https://github.com/cnpait/"
+            "email": "ivanmtw@gmail.com",
+            "homepage": "https://github.com/ivanmtw/"
         }
     ],
     "require": {
