@@ -13,7 +13,7 @@ Declare detect_encoding as a dependency in your projects `composer.json` file:
 ``` json
 {
   "require": {
-    "cnpait/detect_encoding": "dev-master"
+    "ivanmtw/detect_encoding": "dev-master"
   }
 }
 ```
